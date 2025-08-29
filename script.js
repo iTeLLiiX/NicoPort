@@ -421,14 +421,21 @@ function initChatbot() {
     const chatSend = document.getElementById('chat-send');
     const chatMessages = document.getElementById('chat-messages');
 
-    // Toggle chatbot window
+    // Toggle chatbot window with smooth animation
     chatbotToggle.addEventListener('click', function() {
         const isHidden = chatbotWindow.classList.contains('hidden');
         if (isHidden) {
             chatbotWindow.classList.remove('hidden');
+            chatbotWindow.classList.add('show');
             chatIcon.style.display = 'none';
             closeIcon.style.display = 'block';
+            
+            // Focus on input after opening
+            setTimeout(() => {
+                chatInput.focus();
+            }, 300);
         } else {
+            chatbotWindow.classList.remove('show');
             chatbotWindow.classList.add('hidden');
             chatIcon.style.display = 'block';
             closeIcon.style.display = 'none';
@@ -437,9 +444,43 @@ function initChatbot() {
 
     // Minimize chatbot
     chatbotMinimize.addEventListener('click', function() {
+        chatbotWindow.classList.remove('show');
         chatbotWindow.classList.add('hidden');
         chatIcon.style.display = 'block';
         closeIcon.style.display = 'none';
+    });
+
+    // Quick Questions functionality
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('quick-question')) {
+            const question = e.target.textContent;
+            addMessage(question, 'user');
+            
+            // Add typing indicator
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'flex items-start gap-3 typing-indicator';
+            typingDiv.innerHTML = `
+                <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-sm font-bold">
+                    N
+                </div>
+                <div class="bg-muted p-3 rounded-lg">
+                    <div class="flex space-x-1">
+                        <div class="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+                        <div class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                        <div class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                    </div>
+                </div>
+            `;
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Generate and add bot response
+            setTimeout(() => {
+                const response = generateResponse(question);
+                typingDiv.remove();
+                addMessage(response, 'bot');
+            }, 1000);
+        }
     });
 
     // Send message function
@@ -451,11 +492,30 @@ function initChatbot() {
         addMessage(message, 'user');
         chatInput.value = '';
 
+        // Add typing indicator
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'flex items-start gap-3 typing-indicator';
+        typingDiv.innerHTML = `
+            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-sm font-bold">
+                N
+            </div>
+            <div class="bg-muted p-3 rounded-lg">
+                <div class="flex space-x-1">
+                    <div class="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+                    <div class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                    <div class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                </div>
+            </div>
+        `;
+        chatMessages.appendChild(typingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
         // Generate and add bot response
         setTimeout(() => {
             const response = generateResponse(message);
+            typingDiv.remove();
             addMessage(response, 'bot');
-        }, 500);
+        }, 800);
     }
 
     // Send message on button click
@@ -468,25 +528,25 @@ function initChatbot() {
         }
     });
 
-    // Add message to chat
+    // Add message to chat with better styling
     function addMessage(text, sender) {
         const messageDiv = document.createElement('div');
-        messageDiv.className = 'flex items-start gap-3';
+        messageDiv.className = `chat-message ${sender}`;
         
         if (sender === 'user') {
             messageDiv.innerHTML = `
                 <div class="ml-auto">
-                    <div class="bg-primary text-primary-foreground p-3 rounded-lg max-w-xs">
+                    <div class="message bg-primary text-primary-foreground">
                         <p class="text-sm">${text}</p>
                     </div>
                 </div>
             `;
         } else {
             messageDiv.innerHTML = `
-                <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-sm font-bold">
+                <div class="avatar">
                     N
                 </div>
-                <div class="bg-muted p-3 rounded-lg max-w-xs">
+                <div class="message">
                     <p class="text-sm">${text}</p>
                 </div>
             `;

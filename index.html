@@ -237,52 +237,89 @@
         </footer>
     </div>
 
-    <!-- Chatbot -->
-    <div id="chatbot" class="fixed bottom-6 right-6 z-50">
-        <!-- Chatbot Toggle Button -->
-                 <button id="chatbot-toggle" class="bg-primary text-primary-foreground p-4 rounded-full shadow-lg hover:shadow-xl transition-all glow-effect">
-            <svg id="chat-icon" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-            </svg>
-            <svg id="close-icon" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
-        </button>
+         <!-- Chatbot -->
+     <div id="chatbot" class="fixed bottom-6 right-6 z-50">
+         <!-- Chatbot Toggle Button -->
+         <button id="chatbot-toggle" class="bg-primary text-primary-foreground p-5 rounded-full shadow-2xl hover:shadow-3xl transition-all glow-effect chatbot-button relative group">
+             <!-- Pulse Animation -->
+             <div class="absolute inset-0 bg-primary rounded-full animate-ping opacity-20"></div>
+             
+             <!-- Main Button -->
+             <div class="relative z-10">
+                 <svg id="chat-icon" width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                 </svg>
+                 <svg id="close-icon" width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                 </svg>
+             </div>
+             
+             <!-- Tooltip -->
+             <div class="absolute bottom-full right-0 mb-3 px-3 py-2 bg-black text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                 Frag mich alles! 💬
+                 <div class="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
+             </div>
+         </button>
 
-        <!-- Chatbot Window -->
-        <div id="chatbot-window" class="absolute bottom-16 right-0 w-80 h-96 bg-card rounded-lg shadow-xl border hidden">
-            <div class="flex items-center justify-between p-4 border-b">
-                                 <h3 class="font-bold">Frag mich alles! 💬</h3>
-                <button id="chatbot-minimize" class="text-muted-foreground hover:text-foreground">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
-                    </svg>
-                </button>
-            </div>
-            
-            <div id="chat-messages" class="h-64 overflow-y-auto p-4 space-y-3">
-                <div class="flex items-start gap-3">
-                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-sm font-bold">
-                        N
-                    </div>
-                                         <div class="bg-muted p-3 rounded-lg max-w-xs">
-                         <p class="text-sm">Hallo! Ich bin Nico. Frag mich alles zu meinen Skills, Erfahrungen, Projekten oder Zertifizierungen! 🚀</p>
+                 <!-- Chatbot Window -->
+         <div id="chatbot-window" class="absolute bottom-20 right-0 w-96 h-[500px] bg-card rounded-xl shadow-2xl border-2 border-primary/20 backdrop-blur-sm hidden transform transition-all duration-300 scale-95 opacity-0">
+             <!-- Header -->
+             <div class="flex items-center justify-between p-4 border-b bg-gradient-to-r from-primary/10 to-primary/5 rounded-t-xl">
+                 <div class="flex items-center gap-3">
+                     <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-sm font-bold animate-pulse">
+                         N
                      </div>
-                </div>
-            </div>
-            
-            <div class="p-4 border-t">
-                <div class="flex gap-2">
-                                         <input type="text" id="chat-input" placeholder="Schreib deine Frage..."  
-                           class="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-                    <button id="chat-send" class="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
+                     <div>
+                         <h3 class="font-bold text-lg">Nico's Assistant</h3>
+                         <p class="text-xs text-muted-foreground">Online • Frag mich alles! 💬</p>
+                     </div>
+                 </div>
+                 <button id="chatbot-minimize" class="text-muted-foreground hover:text-foreground p-2 rounded-lg hover:bg-muted transition-colors">
+                     <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                     </svg>
+                 </button>
+             </div>
+             
+             <!-- Messages Area -->
+             <div id="chat-messages" class="h-80 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-background/50 to-background/30">
+                 <div class="flex items-start gap-3">
+                     <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-sm font-bold shadow-lg">
+                         N
+                     </div>
+                     <div class="bg-muted p-4 rounded-xl max-w-xs shadow-sm border border-primary/10">
+                         <p class="text-sm leading-relaxed">Hallo! 👋 Ich bin Nico's digitaler Assistent. Frag mich alles zu meinen Skills, Erfahrungen, Projekten oder Zertifizierungen! 🚀</p>
+                     </div>
+                 </div>
+                 
+                 <!-- Quick Questions -->
+                 <div class="flex flex-wrap gap-2 mt-4">
+                     <button class="quick-question bg-primary/10 text-primary px-3 py-1 rounded-full text-xs hover:bg-primary/20 transition-colors border border-primary/20">
+                         Was sind deine Skills?
+                     </button>
+                     <button class="quick-question bg-primary/10 text-primary px-3 py-1 rounded-full text-xs hover:bg-primary/20 transition-colors border border-primary/20">
+                         Zeig mir deine Projekte
+                     </button>
+                     <button class="quick-question bg-primary/10 text-primary px-3 py-1 rounded-full text-xs hover:bg-primary/20 transition-colors border border-primary/20">
+                         Kontakt
+                     </button>
+                 </div>
+             </div>
+             
+             <!-- Input Area -->
+             <div class="p-4 border-t bg-gradient-to-r from-background/50 to-background/30 rounded-b-xl">
+                 <div class="flex gap-2">
+                     <input type="text" id="chat-input" placeholder="Schreib deine Frage..."  
+                            class="flex-1 px-4 py-3 border-2 border-primary/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all bg-background/80 backdrop-blur-sm">
+                     <button id="chat-send" class="bg-primary text-primary-foreground px-6 py-3 rounded-xl hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl transform hover:scale-105">
+                         <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                         </svg>
+                     </button>
+                 </div>
+                 <p class="text-xs text-muted-foreground mt-2 text-center">Drücke Enter zum Senden</p>
+             </div>
+         </div>
     </div>
 
     <script src="script.js"></script>
