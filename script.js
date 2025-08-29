@@ -48,7 +48,7 @@ const projects = [
         description: 'A modern code snippet sharing platform with real-time collaboration features',
         technologies: ['React', 'JavaScript', 'CSS', 'Node.js'],
         image: 'assets/CodeSnap.jpg',
-        url: 'https://codesnap-demo.vercel.app',
+        url: 'https://github.com/iTeLLiiX/CodeSnap',
         github: 'https://github.com/iTeLLiiX/CodeSnap'
     },
     {
@@ -57,7 +57,7 @@ const projects = [
         description: 'Personal portfolio website with modern design and animations',
         technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
         image: 'assets/thomasschasrli.png',
-        url: 'https://thomas-schasrli.vercel.app',
+        url: 'https://github.com/iTeLLiiX/thomas-portfolio',
         github: 'https://github.com/iTeLLiiX/thomas-portfolio'
     },
     {
@@ -66,7 +66,7 @@ const projects = [
         description: 'E-commerce platform connecting artisans with customers worldwide',
         technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
         image: 'assets/craftconnect.png',
-        url: 'https://craftconnect-demo.vercel.app',
+        url: 'https://github.com/iTeLLiiX/CraftConnect',
         github: 'https://github.com/iTeLLiiX/CraftConnect'
     },
     {
@@ -75,7 +75,7 @@ const projects = [
         description: 'Advanced project management tool with team collaboration',
         technologies: ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL'],
         image: 'assets/taskmaster.png',
-        url: 'https://taskmaster-pro.vercel.app',
+        url: 'https://github.com/iTeLLiiX/TaskMaster-Pro',
         github: 'https://github.com/iTeLLiiX/TaskMaster-Pro'
     },
     {
@@ -84,7 +84,7 @@ const projects = [
         description: 'Real-time weather application with beautiful UI/UX',
         technologies: ['React', 'TypeScript', 'OpenWeather API', 'Chart.js'],
         image: 'assets/weatherflow.png',
-        url: 'https://weatherflow-app.vercel.app',
+        url: 'https://github.com/iTeLLiiX/WeatherFlow',
         github: 'https://github.com/iTeLLiiX/WeatherFlow'
     },
     {
@@ -93,7 +93,7 @@ const projects = [
         description: 'Social platform for developers to connect and collaborate',
         technologies: ['Next.js', 'MongoDB', 'Socket.io', 'Tailwind CSS'],
         image: 'assets/devconnect.png',
-        url: 'https://devconnect-social.vercel.app',
+        url: 'https://github.com/iTeLLiiX/DevConnect',
         github: 'https://github.com/iTeLLiiX/DevConnect'
     }
 ];
@@ -367,7 +367,7 @@ function populateProjects() {
                             <polyline points="15,3 21,3 21,9"/>
                             <line x1="10" y1="14" x2="21" y2="3"/>
                         </svg>
-                        <p class="font-bold">Live Demo öffnen</p>
+                                                 <p class="font-bold">GitHub öffnen</p>
                     </div>
                 </div>
             </div>
