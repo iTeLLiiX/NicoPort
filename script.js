@@ -77,29 +77,33 @@ const certificates = [
         title: 'AWS Certified Cloud Practitioner',
         issuer: 'Amazon Web Services',
         date: '2024',
-        badgeUrl: 'https://www.credly.com/badges/aws-certified-cloud-practitioner',
-        description: 'Foundational AWS cloud concepts and services'
+        badgeUrl: 'https://www.credly.com/users/nico-merkel/badges#credly',
+        description: 'Foundational AWS cloud concepts and services',
+        icon: 'aws'
     },
     {
         title: 'Microsoft Certified: Azure Fundamentals',
         issuer: 'Microsoft',
         date: '2024',
-        badgeUrl: 'https://www.credly.com/badges/microsoft-certified-azure-fundamentals',
-        description: 'Cloud concepts and Azure services fundamentals'
+        badgeUrl: 'https://www.credly.com/users/nico-merkel/badges#credly',
+        description: 'Cloud concepts and Azure services fundamentals',
+        icon: 'azure'
     },
     {
         title: 'Google Cloud Certified - Associate Cloud Engineer',
         issuer: 'Google Cloud',
         date: '2023',
-        badgeUrl: 'https://www.credly.com/badges/google-cloud-certified-associate-cloud-engineer',
-        description: 'Deploy and manage applications on Google Cloud'
+        badgeUrl: 'https://www.credly.com/users/nico-merkel/badges#credly',
+        description: 'Deploy and manage applications on Google Cloud',
+        icon: 'google-cloud'
     },
     {
         title: 'Certified Scrum Master (CSM)',
         issuer: 'Scrum Alliance',
         date: '2023',
-        badgeUrl: 'https://www.credly.com/badges/certified-scrum-master-csm',
-        description: 'Agile project management and Scrum methodology'
+        badgeUrl: 'https://www.credly.com/users/nico-merkel/badges#credly',
+        description: 'Agile project management and Scrum methodology',
+        icon: 'scrum'
     }
 ];
 
@@ -345,15 +349,42 @@ function populateCertificates() {
     
     certificates.forEach((cert, index) => {
         const certItem = document.createElement('div');
-        certItem.className = 'bg-card p-6 rounded-lg hover:shadow-md transition-all floating-card';
+        certItem.className = 'bg-card p-6 rounded-lg hover:shadow-md transition-all floating-card certificate-badge';
         certItem.style.animationDelay = `${index * 0.1}s`;
+        
+        // Get appropriate icon based on certificate type
+        let iconSvg = '';
+        switch(cert.icon) {
+            case 'aws':
+                iconSvg = `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M6.763 10.036h1.5v3.5h-1.5v-3.5zm2.5 0h1.5v3.5h-1.5v-3.5zm2.5 0h1.5v3.5h-1.5v-3.5zm2.5 0h1.5v3.5h-1.5v-3.5zm2.5 0h1.5v3.5h-1.5v-3.5zm-10 0h1.5v3.5h-1.5v-3.5zm2.5 0h1.5v3.5h-1.5v-3.5zm2.5 0h1.5v3.5h-1.5v-3.5zm2.5 0h1.5v3.5h-1.5v-3.5zm2.5 0h1.5v3.5h-1.5v-3.5z"/>
+                </svg>`;
+                break;
+            case 'azure':
+                iconSvg = `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.5L20 8v8l-8 3.5V4.5z"/>
+                </svg>`;
+                break;
+            case 'google-cloud':
+                iconSvg = `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>`;
+                break;
+            case 'scrum':
+                iconSvg = `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M9 12l2 2 4-4M21 12c-1 0-2-1-2-2s1-2 2-2 2 1 2 2-1 2-2 2zM3 12c1 0 2-1 2-2s-1-2-2-2-2 1-2 2 1 2 2 2z"/>
+                </svg>`;
+                break;
+            default:
+                iconSvg = `<svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>`;
+        }
         
         certItem.innerHTML = `
             <div class="flex items-start gap-4">
                 <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-primary-foreground">
-                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
+                    ${iconSvg}
                 </div>
                 <div class="flex-1">
                     <h3 class="text-lg font-bold mb-1">${cert.title}</h3>
@@ -362,7 +393,12 @@ function populateCertificates() {
                     <div class="flex items-center justify-between">
                         <span class="text-xs text-muted-foreground">${cert.date}</span>
                         <a href="${cert.badgeUrl}" target="_blank" 
-                           class="text-xs text-primary hover:underline">View Badge</a>
+                           class="text-xs text-primary hover:underline flex items-center gap-1">
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            View on Credly
+                        </a>
                     </div>
                 </div>
             </div>
@@ -497,10 +533,10 @@ function initChatbot() {
             return `Du kannst mich erreichen unter: ${chatbotKnowledge.contact.email}. Ich bin auch aktiv auf GitHub (${chatbotKnowledge.contact.github}) und LinkedIn (${chatbotKnowledge.contact.linkedin}).`;
         }
         
-        // Certificate questions
-        if (message.includes('certificate') || message.includes('certification') || message.includes('badge') || message.includes('zertifikat')) {
-            return `Ich habe mehrere Zertifizierungen, darunter AWS Cloud Practitioner, Microsoft Azure Fundamentals, Google Cloud Associate Engineer und Certified Scrum Master. Alle meine Badges findest du auf meinem Credly-Profil: ${chatbotKnowledge.contact.credly}`;
-        }
+                 // Certificate questions
+         if (message.includes('certificate') || message.includes('certification') || message.includes('badge') || message.includes('zertifikat') || message.includes('credly')) {
+             return `Ich habe mehrere Zertifizierungen, darunter AWS Cloud Practitioner, Microsoft Azure Fundamentals, Google Cloud Associate Engineer und Certified Scrum Master. Alle meine offiziellen Badges findest du auf meinem Credly-Profil: ${chatbotKnowledge.contact.credly}#credly - dort kannst du alle meine Zertifizierungen im Detail sehen!`;
+         }
         
         // Salary/Price questions
         if (message.includes('salary') || message.includes('price') || message.includes('rate') || message.includes('gehalt') || message.includes('preis') || message.includes('stundensatz')) {
