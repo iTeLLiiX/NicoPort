@@ -48,7 +48,7 @@ const projects = [
         description: 'A modern code snippet sharing platform with real-time collaboration features',
         technologies: ['React', 'JavaScript', 'CSS', 'Node.js'],
         image: 'assets/CodeSnap.jpg',
-        url: 'https://github.com/iTeLLiiX/CodeSnap',
+        url: 'https://code-snap-7sn1.vercel.app/',
         github: 'https://github.com/iTeLLiiX/CodeSnap'
     },
     {
@@ -57,7 +57,7 @@ const projects = [
         description: 'Personal portfolio website with modern design and animations',
         technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
         image: 'assets/thomasschasrli.png',
-        url: 'https://github.com/iTeLLiiX/thomas-portfolio',
+        url: 'https://thomas-scharli-facility-and-more-rh.vercel.app/',
         github: 'https://github.com/iTeLLiiX/thomas-portfolio'
     },
     {
@@ -367,7 +367,7 @@ function populateProjects() {
                             <polyline points="15,3 21,3 21,9"/>
                             <line x1="10" y1="14" x2="21" y2="3"/>
                         </svg>
-                                                 <p class="font-bold">GitHub öffnen</p>
+                                                 <p class="font-bold">Live Demo öffnen</p>
                     </div>
                 </div>
             </div>
